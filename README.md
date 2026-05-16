@@ -1,7 +1,7 @@
 # exui-api
 simple memory scanner & socket server for nfsu2
 
-**under progress. not ready for casual usage**
+**under progress. not ready for casual usage. Proof of Concept**
 ## What it does
 with simple configuration in the `variables.txt`:
 ```
