@@ -1,0 +1,3 @@
+speed,float,speed2.exe+3F09E8
+gear,int,speed2.exe+4659BC->1E4
+traffic_level,byte,speed2.exe+43AB7C
