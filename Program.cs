@@ -27,15 +27,16 @@ class Program
 
     private static void LoadDefinitions()
     {
-        const string TargetFile = "variables.txt";
+        string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+        string targetFile = Path.Combine(baseDirectory, "variables.txt");
 
-        if (!File.Exists(TargetFile))
+        if (!File.Exists(targetFile))
         {
             try
             {
-                string defaultTemplate = "# exui Telemetry Variable Mappings\n# Format: name,type,module+baseOffset[->pointerOffset1->pointerOffset2...]\n\nspeed,float,speed2.exe+3F09E8\ngear,int,speed2.exe+4659BC->1E4\n";
-                File.WriteAllText(TargetFile, defaultTemplate);
-                Console.WriteLine($"[exui] '{TargetFile}' not found. Created a clean configuration blueprint file.");
+                string defaultTemplate = "# exui Telemetry Variable Mappings\n# Format: name,type,module+baseOffset[->pointerOffset1...]\n\nspeed,float,speed2.exe+3F09E8\ngear,int,speed2.exe+4659BC->1E4\n";
+                File.WriteAllText(targetFile, defaultTemplate);
+                Console.WriteLine($"[exui] '{targetFile}' not found. Created a clean configuration blueprint file.");
             }
             catch (Exception ex)
             {
@@ -45,7 +46,7 @@ class Program
         }
 
         int loadCount = 0;
-        string[] lines = File.ReadAllLines(TargetFile);
+        string[] lines = File.ReadAllLines(targetFile);
 
         foreach (string line in lines)
         {
