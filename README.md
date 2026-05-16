@@ -2,6 +2,9 @@
 simple memory scanner & socket server for nfsu2
 
 **under progress. not ready for casual usage. Proof of Concept**
+
+### requirements
+- .net sdk 10 LTS
 ## What it does
 with simple configuration in the `variables.txt`:
 ```
