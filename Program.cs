@@ -45,6 +45,9 @@ class Program
             return;
         }
 
+        Console.WriteLine("[exui] LOADING TELEMETRY VARIABLE CONFIGURATIONS...");
+        Console.WriteLine("--------------------------------------------------");
+
         int loadCount = 0;
         string[] lines = File.ReadAllLines(targetFile);
 
@@ -100,14 +103,33 @@ class Program
                 GameState.Definitions.Add(def);
                 GameState.Telemetry[def.Name] = 0;
                 loadCount++;
+
+                // Step 5: Print clean parsed configuration summary immediately on registration
+                Console.WriteLine($"[*] Target: '{def.Name}' ({def.Type})");
+                Console.WriteLine($"    Raw Line:   {line.Trim()}");
+                Console.WriteLine($"    Parsed Map: {def.ModuleName} + 0x{def.BaseOffset:X}");
+                
+                if (def.PointerOffsets.Length > 0)
+                {
+                    string chainDisplay = string.Join(" -> ", Array.ConvertAll(def.PointerOffsets, x => $"+0x{x:X}"));
+                    Console.WriteLine($"    Offsets:    [Base Pointer] -> {chainDisplay}");
+                }
+                else
+                {
+                    Console.WriteLine("    Offsets:    Static Memory Address Location");
+                }
+                Console.WriteLine("--------------------------------------------------");
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"[exui] Failed parsing item line [{line}]: {ex.Message}");
+                Console.WriteLine("--------------------------------------------------");
             }
         }
 
-        Console.WriteLine($"[exui] Successfully mapped and tracking {loadCount} telemetry data targets.");
-        Console.WriteLine("--------------------------------------------------");
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.WriteLine($"[exui] Done! Successfully loaded {loadCount} telemetry layouts into tracker layout registry.");
+        Console.ResetColor();
+        Console.WriteLine("==================================================\n");
     }
 }
