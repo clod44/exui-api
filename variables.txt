@@ -1,3 +1,5 @@
-speed,float,speed2.exe+3F09E8
-gear,int,speed2.exe+4659BC->1E4
 traffic_level,byte,speed2.exe+43AB7C
+gear,int,speed2.exe+4659BC->1E4
+speed_mph,float,SPEED2.EXE+3F09E8
+rpm,float,speed2.exe+4659BC->220->440
+time,float,speed2.exe+4659BC->220->9ac
